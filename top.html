@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Khung Livestream — Top</title>
+<link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=ZCOOL+XiaoWei&family=Noto+Serif+SC:wght@700;900&display=swap"
+    rel="stylesheet">
+<style>
+
+    :root {
+      --imperial-red: #8b1e1e;
+      --imperial-red-deep: #4a0808;
+      --imperial-red-glow: #c43030;
+      --gold: #e8b945;
+      --gold-deep: #8a6018;
+      --gold-light: #fde9a8;
+      --cream: #fff3d6;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    body {
+      background: #1a1a1a;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      font-family: 'ZCOOL XiaoWei', serif;
+    }
+
+    /* ===== KHUNG TIKTOK 9:16 ===== */
+    .frame {
+      position: relative;
+      width: 540px;
+      height: 960px;
+      /* Nền đỏ cung đình đậm để hòa liền mạch với nhân vật */
+      background:
+        radial-gradient(ellipse at 50% 60%, #5a1010 0%, #3a0808 35%, #1f0404 70%, #100202 100%);
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, .8);
+    }
+
+    /* Hoa văn nền */
+    .pattern-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(45deg, rgba(232, 185, 69, .03) 0 2px, transparent 2px 24px),
+        repeating-linear-gradient(-45deg, rgba(232, 185, 69, .03) 0 2px, transparent 2px 24px);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ===== TOP — MÁI HIÊN CUNG ĐÌNH ===== */
+    .top-decor {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 120px;
+      z-index: 5;
+    }
+
+    .top-band {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 84px;
+      background:
+        linear-gradient(180deg, var(--imperial-red-deep) 0%, var(--imperial-red) 60%, var(--imperial-red-deep) 100%);
+      box-shadow: inset 0 -2px 8px rgba(0, 0, 0, .4);
+    }
+
+    .roof-edge {
+      position: absolute;
+      top: -2px;
+      left: 0;
+      right: 0;
+      height: 22px;
+      background: #1a0303;
+      clip-path: polygon(0% 100%, 0% 70%,
+          3% 20%, 6% 60%, 9% 20%, 12% 60%, 15% 20%, 18% 60%,
+          21% 20%, 24% 60%, 27% 20%, 30% 60%, 33% 20%, 36% 60%,
+          39% 20%, 42% 60%, 45% 20%, 48% 60%, 51% 20%, 54% 60%,
+          57% 20%, 60% 60%, 63% 20%, 66% 60%, 69% 20%, 72% 60%,
+          75% 20%, 78% 60%, 81% 20%, 84% 60%, 87% 20%, 90% 60%,
+          93% 20%, 96% 60%, 99% 20%, 100% 70%,
+          100% 100%);
+    }
+
+    .roof-edge::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, var(--gold) 0%, var(--gold-deep) 50%, transparent 100%);
+      opacity: .7;
+      clip-path: inherit;
+    }
+
+    .gold-line-top {
+      position: absolute;
+      top: 82px;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, var(--gold-deep) 10%, var(--gold) 30%, var(--gold-light) 50%, var(--gold) 70%, var(--gold-deep) 90%, transparent);
+      box-shadow: 0 0 14px rgba(232, 185, 69, .6);
+    }
+
+    .top-pattern {
+      position: absolute;
+      top: 16px;
+      left: 0;
+      right: 0;
+      height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .top-pattern svg {
+      width: 30px;
+      height: 30px;
+      filter: drop-shadow(0 0 4px rgba(232, 185, 69, .5));
+    }
+
+    .top-pattern .center-medallion {
+      width: 50px;
+      height: 50px;
+    }
+
+    /* ===== ĐÈN LỒNG ===== */
+    .lantern {
+      position: absolute;
+      width: 50px;
+      height: 68px;
+      z-index: 6;
+      animation: sway 4s ease-in-out infinite;
+      transform-origin: top center;
+    }
+
+    .lantern.left {
+      top: 84px;
+      left: 16px;
+      animation-delay: -1.5s
+    }
+
+    .lantern.right {
+      top: 84px;
+      right: 16px
+    }
+
+    @keyframes sway {
+
+      0%,
+      100% {
+        transform: rotate(-4deg)
+      }
+
+      50% {
+        transform: rotate(4deg)
+      }
+    }
+
+    .lantern::before {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: 50%;
+      width: 1px;
+      height: 8px;
+      background: var(--gold);
+      transform: translateX(-50%);
+    }
+
+    .lantern-cap {
+      position: absolute;
+      top: 4px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 28px;
+      height: 6px;
+      background: linear-gradient(180deg, var(--gold-light), var(--gold-deep));
+      border-radius: 2px 2px 0 0;
+    }
+
+    .lantern-body {
+      position: absolute;
+      top: 10px;
+      left: 0;
+      right: 0;
+      height: 46px;
+      background:
+        radial-gradient(ellipse at 35% 35%, #ff6060 0%, #c01818 50%, #6a0808 100%);
+      border-radius: 50% / 45%;
+      box-shadow:
+        0 0 22px rgba(255, 80, 80, .7),
+        inset -4px -6px 10px rgba(0, 0, 0, .45),
+        inset 4px 4px 10px rgba(255, 200, 100, .35);
+    }
+
+    .lantern-body::before {
+      content: '福';
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Noto Serif SC', serif;
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--gold);
+      text-shadow: 0 0 6px rgba(0, 0, 0, .7);
+    }
+
+    .lantern-body::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 48%;
+      height: 2px;
+      background: rgba(0, 0, 0, .35);
+    }
+
+    .lantern-tassel {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 9px solid var(--gold-deep);
+    }
+
+    .lantern-tassel::after {
+      content: '';
+      position: absolute;
+      top: 7px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 7px;
+      background: linear-gradient(180deg, var(--gold), transparent);
+    }
+
+    /* ===== DÒNG CHỮ "LIVE: 20H00" GIỮA 2 ĐÈN LỒNG ===== */
+    .live-time {
+      position: absolute;
+      top: 118px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 7;
+      font-family: 'Cinzel', 'Noto Serif SC', serif;
+      font-weight: 900;
+      font-size: 22px;
+      letter-spacing: 4px;
+      /* Gradient vàng kim cung đình */
+      background: linear-gradient(180deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-deep) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      /* Glow + shadow để chữ nổi trên nền đỏ */
+      filter:
+        drop-shadow(0 0 8px rgba(232, 185, 69, .7)) drop-shadow(0 2px 3px rgba(0, 0, 0, .8));
+      white-space: nowrap;
+      animation: liveTimePulse 2s ease-in-out infinite;
+    }
+
+    @keyframes liveTimePulse {
+
+      0%,
+      100% {
+        filter: drop-shadow(0 0 8px rgba(232, 185, 69, .7)) drop-shadow(0 2px 3px rgba(0, 0, 0, .8))
+      }
+
+      50% {
+        filter: drop-shadow(0 0 14px rgba(253, 233, 168, 1)) drop-shadow(0 2px 3px rgba(0, 0, 0, .8))
+      }
+    }
+
+    /* Dot live nháy đỏ */
+    .live-time::before {
+      content: '●';
+      color: #ff3535;
+      font-size: 14px;
+      margin-right: 8px;
+      vertical-align: middle;
+      -webkit-text-fill-color: #ff3535;
+      text-shadow: 0 0 8px #ff5050, 0 0 4px #ff8080;
+      animation: liveBlink 1s ease-in-out infinite;
+    }
+
+    @keyframes liveBlink {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: .3
+      }
+    }
+
+    /* ===== KHUNG GAMEPLAY — KHÔNG CÓ VIỀN VÀNG ===== */
+    .gameplay-wrap {
+      position: absolute;
+      top: 180px;
+      left: 0px;
+      right: 0px;
+      aspect-ratio: 16 / 9;
+      z-index: 4;
+    }
+
+    /* Chỉ giữ vùng đen nội dung — không viền */
+    .gameplay-area {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at center, #1a3550 0%, #08111c 100%);
+      overflow: hidden;
+      z-index: 2;
+      box-shadow:
+        0 8px 30px rgba(0, 0, 0, .7),
+        inset 0 0 20px rgba(0, 0, 0, .6);
+    }
+
+    .game-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, .22);
+      text-align: center;
+      gap: 10px;
+    }
+
+    .game-placeholder .crown {
+      font-size: 42px;
+      opacity: .5
+    }
+
+    .game-placeholder .label {
+      font-size: 13px;
+      letter-spacing: 5px;
+      border: 1px dashed rgba(255, 255, 255, .18);
+      padding: 7px 18px;
+    }
+
+    .game-placeholder .sub {
+      font-size: 10px;
+      letter-spacing: 3px;
+      opacity: .55
+    }
+
+    /* 4 góc trang trí nhỏ — kim thủy bên ngoài góc */
+    .gp-corner {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      z-index: 5;
+      pointer-events: none;
+      filter: drop-shadow(0 0 6px rgba(232, 185, 69, .9));
+    }
+
+    .gp-corner.tl {
+      top: -8px;
+      left: -8px
+    }
+
+    .gp-corner.tr {
+      top: -8px;
+      right: -8px;
+      transform: scaleX(-1)
+    }
+
+    .gp-corner.bl {
+      bottom: -8px;
+      left: -8px;
+      transform: scaleY(-1)
+    }
+
+    .gp-corner.br {
+      bottom: -8px;
+      right: -8px;
+      transform: scale(-1, -1)
+    }
+
+    /* ===== NHÂN VẬT HOÀNG HẬU ===== */
+    .character-stage {
+      position: absolute;
+      top: 453px;
+      left: 0;
+      right: 0;
+      bottom: 0px;
+      z-index: 3;
+      overflow: hidden;
+    }
+
+    /* ===== KHUNG HOA ĐÀO — ĐẶT NGOÀI VÙNG NHÂN VẬT ===== */
+    /* Khung hoa nằm sát mép trái, phải và đáy của vùng nhân vật.
+     KHÔNG đè lên nhân vật ở giữa. */
+    .sakura-frame {
+      position: absolute;
+      top: 493px;
+      left: 0;
+      right: 0;
+      bottom: 75px;
+      z-index: 9;
+      pointer-events: none;
+    }
+
+    .sakura-cluster {
+      position: absolute;
+      filter: drop-shadow(0 3px 8px rgba(0, 0, 0, .5)) drop-shadow(0 0 6px rgba(255, 180, 200, .4));
+    }
+
+    /* CẠNH TRÁI — 3 cụm hoa dọc theo mép trái khung */
+    .sakura-cluster.tl {
+      top: -20px;
+      left: -30px;
+      width: 160px;
+      height: 160px;
+      animation: sakuraSwayL 4s ease-in-out infinite
+    }
+
+    .sakura-cluster.ml {
+      top: 38%;
+      left: -40px;
+      width: 120px;
+      height: 120px;
+      animation: sakuraSwayL 4s ease-in-out infinite -1s
+    }
+
+    .sakura-cluster.bl {
+      bottom: -20px;
+      left: -25px;
+      width: 150px;
+      height: 150px;
+      animation: sakuraSwayL 4s ease-in-out infinite -2s
+    }
+
+    /* CẠNH PHẢI — 3 cụm hoa dọc theo mép phải khung */
+    .sakura-cluster.tr {
+      top: -20px;
+      right: -30px;
+      width: 160px;
+      height: 160px;
+      animation: sakuraSwayR 4s ease-in-out infinite -.5s
+    }
+
+    .sakura-cluster.mr {
+      top: 38%;
+      right: -40px;
+      width: 120px;
+      height: 120px;
+      animation: sakuraSwayR 4s ease-in-out infinite -1.5s
+    }
+
+    .sakura-cluster.br {
+      bottom: -20px;
+      right: -25px;
+      width: 150px;
+      height: 150px;
+      animation: sakuraSwayR 4s ease-in-out infinite -2.5s
+    }
+
+    @keyframes sakuraSwayL {
+
+      0%,
+      100% {
+        transform: rotate(-1deg) scale(1)
+      }
+
+      50% {
+        transform: rotate(2deg) scale(1.03)
+      }
+    }
+
+    @keyframes sakuraSwayR {
+
+      0%,
+      100% {
+        transform: scaleX(-1) rotate(-1deg) scale(1)
+      }
+
+      50% {
+        transform: scaleX(-1) rotate(2deg) scale(1.03)
+      }
+    }
+
+    /* Hào quang lớn sau lưng nhân vật */
+    .character-aura {
+      position: absolute;
+      top: -50px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 750px;
+      height: 750px;
+      background:
+        radial-gradient(circle at center,
+          rgba(232, 185, 69, .42) 0%,
+          rgba(196, 48, 48, .3) 28%,
+          rgba(74, 8, 8, .2) 55%,
+          transparent 75%);
+      z-index: 1;
+      animation: auraPulse 4s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes auraPulse {
+
+      0%,
+      100% {
+        opacity: .75;
+        transform: translateX(-50%) scale(1)
+      }
+
+      50% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1.06)
+      }
+    }
+
+    /* Tia sáng xoay */
+    .sun-rays {
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 650px;
+      height: 650px;
+      z-index: 2;
+      opacity: .45;
+      animation: spin 8s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes spin {
+      to {
+        transform: translateX(-50%) rotate(360deg)
+      }
+    }
+
+    /* ===== NHÂN VẬT — MASK ELLIPSE ĐỂ HÒA LIỀN MẠCH ===== */
+    .character-clip {
+      position: absolute;
+      top: -370px;
+      left: 40%;
+      transform: translate(-50%);
+      width: 720px;
+      height: 520px;
+    }
+
+    .character {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter:
+        drop-shadow(0 0 40px rgba(232, 185, 69, .55)) drop-shadow(0 -8px 25px rgba(196, 48, 48, .35)) drop-shadow(0 10px 25px rgba(0, 0, 0, .7));
+    }
+
+    /* Lớp phủ màu đỏ nhẹ trên nhân vật — hòa màu với background */
+    .character-tint {
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 720px;
+      height: 520px;
+      z-index: 4;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 50% 60% at 50% 50%,
+          transparent 0%,
+          transparent 55%,
+          rgba(74, 8, 8, .3) 75%,
+          rgba(58, 8, 8, .6) 92%,
+          rgba(31, 4, 4, .85) 100%);
+      mix-blend-mode: multiply;
+    }
+
+    /* Vầng sáng phía trên nhân vật — gradient đỏ hòa với gameplay shadow */
+    .top-fade {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 80px;
+      z-index: 5;
+      pointer-events: none;
+      background:
+        linear-gradient(180deg,
+          rgba(31, 4, 4, .95) 0%,
+          rgba(74, 8, 8, .5) 50%,
+          transparent 100%);
+    }
+
+    /* Vầng tối dưới nhân vật — gradient hòa với dải đỏ bottom */
+    .bottom-fade {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 140px;
+      z-index: 5;
+      pointer-events: none;
+      background:
+        linear-gradient(0deg,
+          rgba(31, 4, 4, .95) 0%,
+          rgba(74, 8, 8, .7) 35%,
+          rgba(74, 8, 8, .3) 70%,
+          transparent 100%);
+    }
+
+    /* ===== CÁNH HOA RƠI — CHỈ DƯỚI GAMEPLAY ===== */
+    .petals {
+      position: absolute;
+      top: 453px;
+      left: 0;
+      right: 0;
+      bottom: 75px;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 8;
+    }
+
+    .petal {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background: radial-gradient(ellipse at 30% 30%, #ffd8e8, #ff9ec0 50%, #d04878);
+      border-radius: 50% 0 50% 0;
+      opacity: .85;
+      animation: fall linear infinite;
+      box-shadow: 0 0 4px rgba(255, 158, 192, .5);
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-20px) rotate(0deg);
+        opacity: 0
+      }
+
+      10% {
+        opacity: .9
+      }
+
+      90% {
+        opacity: .7
+      }
+
+      100% {
+        transform: translateY(480px) rotate(540deg);
+        opacity: 0
+      }
+    }
+
+    .petal:nth-child(1) {
+      left: 4%;
+      animation-duration: 8s;
+      animation-delay: 0s;
+      transform: scale(.7)
+    }
+
+    .petal:nth-child(2) {
+      left: 14%;
+      animation-duration: 8s;
+      animation-delay: -0.67s;
+      transform: scale(1)
+    }
+
+    .petal:nth-child(3) {
+      left: 24%;
+      animation-duration: 8s;
+      animation-delay: -1.34s;
+      transform: scale(.8)
+    }
+
+    .petal:nth-child(4) {
+      left: 34%;
+      animation-duration: 8s;
+      animation-delay: -2s;
+      transform: scale(.65)
+    }
+
+    .petal:nth-child(5) {
+      left: 44%;
+      animation-duration: 8s;
+      animation-delay: -2.67s;
+      transform: scale(.9)
+    }
+
+    .petal:nth-child(6) {
+      left: 55%;
+      animation-duration: 8s;
+      animation-delay: -3.34s;
+      transform: scale(.75)
+    }
+
+    .petal:nth-child(7) {
+      left: 65%;
+      animation-duration: 8s;
+      animation-delay: -4s;
+      transform: scale(1)
+    }
+
+    .petal:nth-child(8) {
+      left: 75%;
+      animation-duration: 8s;
+      animation-delay: -4.67s;
+      transform: scale(.85)
+    }
+
+    .petal:nth-child(9) {
+      left: 85%;
+      animation-duration: 8s;
+      animation-delay: -5.34s;
+      transform: scale(.7)
+    }
+
+    .petal:nth-child(10) {
+      left: 94%;
+      animation-duration: 8s;
+      animation-delay: -6s;
+      transform: scale(.95)
+    }
+
+    .petal:nth-child(11) {
+      left: 30%;
+      animation-duration: 8s;
+      animation-delay: -6.67s;
+      transform: scale(.6)
+    }
+
+    .petal:nth-child(12) {
+      left: 70%;
+      animation-duration: 8s;
+      animation-delay: -7.34s;
+      transform: scale(.8)
+    }
+
+    /* ===== BOTTOM — DẢI ĐỎ DƯỚI ===== */
+    .bottom-decor {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 75px;
+      z-index: 6;
+    }
+
+    .bottom-band {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 65px;
+      background:
+        linear-gradient(0deg, var(--imperial-red-deep) 0%, var(--imperial-red) 60%, var(--imperial-red-deep) 100%);
+      box-shadow: inset 0 2px 8px rgba(0, 0, 0, .4);
+    }
+
+    .gold-line-bottom {
+      position: absolute;
+      bottom: 63px;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, var(--gold-deep) 10%, var(--gold) 30%, var(--gold-light) 50%, var(--gold) 70%, var(--gold-deep) 90%, transparent);
+      box-shadow: 0 0 14px rgba(232, 185, 69, .6);
+    }
+
+    .roof-edge-bottom {
+      position: absolute;
+      bottom: 63px;
+      left: 0;
+      right: 0;
+      height: 14px;
+      background: var(--imperial-red-deep);
+      clip-path: polygon(0% 0%, 100% 0%, 100% 100%,
+          98% 50%, 95% 100%, 92% 50%, 89% 100%, 86% 50%, 83% 100%,
+          80% 50%, 77% 100%, 74% 50%, 71% 100%, 68% 50%, 65% 100%,
+          62% 50%, 59% 100%, 56% 50%, 53% 100%, 50% 50%, 47% 100%,
+          44% 50%, 41% 100%, 38% 50%, 35% 100%, 32% 50%, 29% 100%,
+          26% 50%, 23% 100%, 20% 50%, 17% 100%, 14% 50%, 11% 100%,
+          8% 50%, 5% 100%, 2% 50%, 0% 100%);
+    }
+
+    .bottom-pattern {
+      position: absolute;
+      bottom: 14px;
+      left: 0;
+      right: 0;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+    }
+
+    .bottom-pattern svg {
+      width: 28px;
+      height: 28px;
+      filter: drop-shadow(0 0 4px rgba(232, 185, 69, .5));
+    }
+
+    .bottom-pattern .center-seal {
+      width: 46px;
+      height: 46px;
+    }
+  
+
+/* === OVERRIDE CHO TOP === */
+body {
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  min-height: 0;
+  display: block;
+}
+.frame {
+  width: 100vw;
+  height: 100vh;
+  max-width: 100vw;
+  background: transparent;
+  box-shadow: none;
+}
+/* Background đỏ chỉ phủ phần top (cao 180px tương đối ≈ 18.75% của khung 9:16) */
+.frame::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 100%;
+  background: radial-gradient(ellipse at 50% 100%, #5a1010 0%, #3a0808 50%, #1f0404 100%);
+  z-index: 0;
+}
+</style>
+</head>
+<body>
+<div class="frame">
+
+  <!-- Nền hoa văn -->
+  <div class="pattern-bg"></div>
+
+  <!-- TOP TRANG TRÍ -->
+  <div class="top-decor">
+    <div class="top-band"></div>
+    <div class="roof-edge"></div>
+    <div class="gold-line-top"></div>
+  </div>
+
+  <!-- Đèn lồng -->
+  <div class="lantern left">
+    <div class="lantern-cap"></div>
+    <div class="lantern-body"></div>
+    <div class="lantern-tassel"></div>
+  </div>
+  <div class="lantern right">
+    <div class="lantern-cap"></div>
+    <div class="lantern-body"></div>
+    <div class="lantern-tassel"></div>
+  </div>
+
+  <!-- LIVE: 20H00 -->
+  <div class="live-time">LIVE: 20H00</div>
+
+</div>
+</body>
+</html>
